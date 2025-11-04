@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: row;
+
+
+  border: 1px solid rgb(175, 175, 175);
+  border-radius: 0.4rem;
+  overflow: hidden;
+  height: 95vh;
+}
+
+.sidebar {
+  width: 10%;
+  border-right: 2px solid rgb(175, 175, 175);
+  padding: 1rem;
+  background-color: rgb(175, 175, 175);
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  padding-top: 1rem;
+}
+
+
+.sidebar a {
+  text-decoration: none;
+}
