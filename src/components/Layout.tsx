@@ -1,6 +1,10 @@
 import { Outlet, Link } from 'react-router-dom';
 import styles from './Layout.module.css';
 
+import { FaHome } from "react-icons/fa";
+import { FaCircleInfo } from "react-icons/fa6";
+
+
 const Layout = () => {
   return (
     // Use the class from the module object
@@ -10,10 +14,16 @@ const Layout = () => {
         <h2>My App</h2>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className={styles.navLink}> 
+              <FaHome /> 
+                <span>Home</span>            
+              </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about" className={styles.navLink}>
+              <FaCircleInfo />
+              <span>About</span>
+            </Link>
           </li>
         </ul>
       </nav>

@@ -36,3 +36,21 @@
 .sidebar a {
   text-decoration: none;
 }
+
+
+.navLink {
+  display: flex;         /* Puts the icon and <span> in a row */
+  align-items: center;   /* Aligns them vertically in the middle */
+  gap: 10px;             /* Puts a 10px space between them */
+
+  /* Your other link styles */
+  text-decoration: none;
+  color: #333;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+/* Add a nice hover effect */
+.navLink:hover {
+  background-color: #eee;
+}
