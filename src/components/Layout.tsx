@@ -2,6 +2,7 @@ import { Outlet, Link } from 'react-router-dom';
 import styles from './Layout.module.css';
 
 import { FaHome } from "react-icons/fa";
+import { SiJira } from "react-icons/si";
 import { FaCircleInfo } from "react-icons/fa6";
 
 
@@ -18,6 +19,12 @@ const Layout = () => {
               <FaHome /> 
                 <span>Home</span>            
               </Link>
+          </li>
+          <li>
+            <Link to="/jira" className={styles.navLink}>
+              <SiJira />
+              <span>Jira</span>
+            </Link>
           </li>
           <li>
             <Link to="/about" className={styles.navLink}>

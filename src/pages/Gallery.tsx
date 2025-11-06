@@ -1,15 +1,43 @@
 import { useState } from 'react';
 import { sculptureList } from '../data/data';
 
+import styles from './GalleryPage.module.css'
+import { MdNavigateNext } from "react-icons/md";
+import { MdNavigateBefore } from "react-icons/md";
+import { CgDetailsMore } from "react-icons/cg";
+import { CgDetailsLess } from "react-icons/cg";
+
+
+
+
 
 
 const Gallery = () => {
 
     const [index, setIndex] = useState(0);
     const [showMore, setShowMore] = useState(false);
+    
 
-    const handleClick = () => {
-        setIndex(index + 1)
+    let hasNext = index < sculptureList.length - 1;   
+    let hasPrev = index > 0
+
+
+    const handleNextClick = () => {
+        if (hasNext) {
+            setIndex(index + 1)
+        } else {
+            setIndex(0)
+        }
+        
+    }
+
+    const handlePreviousClick = () => {
+        if (hasPrev) {
+            setIndex(index - 1)
+        } else {
+            setIndex(sculptureList.length -1)
+        }
+        
     }
 
     const handleShowMore = () => {
@@ -19,29 +47,50 @@ const Gallery = () => {
     const sculpture = sculptureList[index];
 
     return (
-        <div>
-            <button onClick={handleClick}>
-                Next
-            </button>
+        <div className={styles.container}>
             
-            <h2>
-                <i>{sculpture.name}</i> by {sculpture.artist}
-            </h2>
+            <div className={styles.row1}>
+                <h2>
+                    <i>{sculpture.name}</i> by {sculpture.artist}
+                </h2>
+            
+                <button onClick={handleShowMore}>
+                    {showMore ? <CgDetailsLess /> : <CgDetailsMore />}
+                </button>
+            </div>
 
-            <h3>  
+            {showMore && <p className={styles.row2}> {sculpture.description} </p>}
+
+
+            <div className={styles.row3}>
+                <button 
+                    className={styles.nextprevButton}
+                    onClick={handlePreviousClick}
+                >
+                    <MdNavigateBefore />
+                </button>
+
+                <img 
+                    src={sculpture.url} 
+                    alt={sculpture.alt}
+                    className={styles.mainImage}
+                />
+
+                <button
+                    className={styles.nextprevButton}
+                    onClick={handleNextClick}
+                >
+                    <MdNavigateNext />
+                </button>
+
+            </div>
+
+            <p className={styles.row4}>
                 ({index + 1} of {sculptureList.length})
-            </h3>
+            </p>
 
-            <button onClick={handleShowMore}>
-                {showMore ? 'Hide' : 'Show'} Details
-            </button>
 
-            {showMore && <p> {sculpture.description} </p>}
 
-            <img 
-                src={sculpture.url} 
-                alt={sculpture.alt}
-            />
 
         </div>
     )

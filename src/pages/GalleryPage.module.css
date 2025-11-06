@@ -1,0 +1,76 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* Adds space BETWEEN each row */
+}
+
+.row1 {
+  display: flex; /* Makes this a flex-ROW (the default) */
+  justify-content: center; /* Horizontally centers the group */
+  align-items: center; /* Aligns them vertically */
+}
+
+.row1 button {
+  background: none;
+  border: none;
+  padding-top: 0.2rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  
+  /* Make the icon bigger and give it a nice color */
+  font-size: 1.5rem; /* 24px */
+  color: #666; /* A nice medium-grey */
+}
+
+.row1 button:hover {
+  color: #000;
+}
+
+.row2 {
+  margin: 1rem; /* Remove default paragraph margin */
+  text-align: center; 
+  color: #555;
+}
+
+.row3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; /* Horizontally centers the group */
+  gap: 10px; /* Space between the items */
+}
+
+.mainImage {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 3px solid black;
+}
+
+.row4 {
+  text-align: center; 
+  width: 100%;
+ 
+  font-size: 0.9rem;
+  font-style: italic;
+  margin: 0;
+}
+
+.nextprevButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  font-size: 2.5rem;
+  color: #555; 
+  
+  /* Make it easy to click */
+  border-radius: 50%;
+  padding: 4px;
+}
+
+.nextprevButton:hover {
+  color: #000;
+}
