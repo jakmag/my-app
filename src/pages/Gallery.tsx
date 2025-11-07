@@ -18,8 +18,8 @@ const Gallery = () => {
     const [showMore, setShowMore] = useState(false);
     
 
-    let hasNext = index < sculptureList.length - 1;   
-    let hasPrev = index > 0
+    const hasNext = index < sculptureList.length - 1;   
+    const hasPrev = index > 0
 
 
     const handleNextClick = () => {

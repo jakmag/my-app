@@ -1,41 +1,58 @@
 import { useState } from "react";
 
+interface Item {
+    id: number,
+    item: string
+}
+
+
+let nextId = 0;
+
+
 const JiraPage = () => {
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [input,setInput] = useState('')
+    const [items,setItems] = useState<Item[]>([]);
 
-    const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFirstName(e.target.value);
+
+    const handleAddItem = () => {
+        setItems([
+            {id: nextId++,item: input},
+            ...items 
+        ])
     }
 
-     const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setLastName(e.target.value);
-    }
-
-    const handleReset = () => {
-        setFirstName('');
-        setLastName('');
+    const handleDeleteItem = (itemId: number) => {
+        setItems(items.filter(a => a.id !== itemId))                
     }
 
 
     return (
-        <form onSubmit={e => e.preventDefault()}>
+        <div>
+            <h1>Items</h1>
+
             <input 
-                type="text"
-                placeholder="Add First Name"
-                value={firstName}
-                onChange={handleFirstNameChange}
+                type="text" 
+                onChange={e => setInput(e.target.value)}
+                value={input}
+                placeholder="Enter an Item"
             />
-            <input 
-                type="text"
-                placeholder="Add Last Name"
-                value={lastName}
-                onChange={handleLastNameChange}
-            />
-            <h1>Hello, {firstName} {lastName}</h1>
-            <button onClick={handleReset}>Reset</button>
-        </form>
+
+            <button
+                onClick={handleAddItem}>
+                Add
+            </button>
+
+            <ul>
+                {items.map(item => (
+                    <li key={item.id}>
+                        {item.item}
+                        <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
+                    </li>
+                ))}
+            </ul>
+
+        </div>
     )
 }
 
