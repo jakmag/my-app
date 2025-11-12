@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 interface Item {
     id: number,
@@ -15,16 +15,11 @@ const JiraPage = () => {
     const [input,setInput] = useState('')
     const [items,setItems] = useState<Item[]>([]);
 
-    const myRef = useRef(null);
 
     useEffect(() => {
         
-        if (myRef.current) {
-            myRef.current.focus();
-        }
+    })
 
-    },[]);
-    
 
     const handleAddItem = () => {
         setItems([
@@ -44,7 +39,6 @@ const JiraPage = () => {
             <h1>Items</h1>
 
             <input
-                ref={myRef} 
                 type="text" 
                 onChange={e => setInput(e.target.value)}
                 value={input}
