@@ -1,50 +1,70 @@
-import { useState , useRef , useEffect } from "react"
+import { useState , useEffect } from "react";
 
-interface VideoPlayerProps {
-    isPlaying: boolean,
-    src: string    
+interface JiraProject {
+    id: string;
+    key: string;
+    name: string
 }
-
-
-const VideoPlayer = ({isPlaying, src}:VideoPlayerProps) => {
-
-    const ref = useRef<HTMLVideoElement>(null);
-
-    useEffect(() => {
-        if (ref.current) {
-            if (isPlaying) {
-                ref.current.play()
-            } else {
-                ref.current.pause()
-            }
-        }
-
-    },[isPlaying])
-
-
-    return (
-        <video ref={ref} src={src} loop playsInline/>
-    )
-}
-
-
 
 
 const AboutPage = () => {
 
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [projects, setProjects] = useState<JiraProject[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+
+        const email = import.meta.env.VITE_JIRA_EMAIL;
+        const token = import.meta.env.VITE_JIRA_TOKEN;
+
+        const credentials = `${email}:${token}`;
+            // Base64 encode them using the browser's btoa() function
+        const encodedToken = btoa(credentials);
+
+        const fetchSpaces = async () => {
+
+            try {
+                
+                const response = await fetch('/jira-api/rest/api/3/project', {
+                    headers: {
+                        'Authorization': `Basic ${encodedToken}`,
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                setProjects(data);
+                
+                
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+            } catch (error: any) {
+                setError(error.message)                
+            } finally {
+                setLoading(false)
+            }
+            
+           
+        }
+
+         fetchSpaces();
+
+    },[]);
+
 
     return (
         <div>
             <h1>About Page</h1>
-
-            <button onClick={() => setIsPlaying(!isPlaying)}>
-                {isPlaying ? 'Pause' : 'Play'}
-            </button>
-            <VideoPlayer
-                isPlaying={isPlaying}
-                src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-            />
+            {loading && <p>Loading Jira Spaces</p>}
+            {error && <p>Error while loading Jira Spaces</p>}
+            <ul>
+                {projects.map(project => {
+                    return <li key={project.id}>{project.key} : {project.name}</li>
+                })}
+            </ul>
         </div>
     )
 }
