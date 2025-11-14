@@ -4,6 +4,10 @@ import styles from './Layout.module.css';
 import { FaHome } from "react-icons/fa";
 import { SiJira } from "react-icons/si";
 import { FaCircleInfo } from "react-icons/fa6";
+import { ImLab } from "react-icons/im";
+
+
+
 
 
 const Layout = () => {
@@ -24,6 +28,12 @@ const Layout = () => {
             <Link to="/jira" className={styles.navLink}>
               <SiJira />
               <span>Jira</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/testlab" className={styles.navLink}>
+              <ImLab />
+              <span>Test Lab</span>
             </Link>
           </li>
           <li>

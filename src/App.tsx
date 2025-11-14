@@ -3,6 +3,7 @@ import { Routes , Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import JiraPage from './pages/JiraPage'
+import TestLabPage from './pages/TestLabPage'
 import AboutPage from './pages/AboutPage'
 
 const App = () => {
@@ -14,6 +15,8 @@ const App = () => {
           <Route index element={<HomePage />} />
 
           <Route path="jira" element={<JiraPage />} />
+
+          <Route path="testlab" element={<TestLabPage />} />
 
           <Route path="about" element={<AboutPage />} />
         
